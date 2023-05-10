@@ -1,0 +1,35 @@
+.toast {
+  padding: 16px;
+  min-width: 200px;
+  animation: showToast linear 0.3s;
+  -webkit-animation: showToast linear 0.2s !important;
+  border-radius: 8px;
+  min-height: 62px;
+  div {
+    margin: 0;
+    padding: 0 10px;
+    justify-content: unset;
+    font-weight: 600;
+    line-height: 1.57143;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    // word-break: break-all;
+  }
+}
+@keyframes showToast {
+  from {
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+}

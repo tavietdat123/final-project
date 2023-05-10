@@ -15,4 +15,5 @@ const intlSlice = createSlice({
     },
   },
 });
-export default intlSlice;
+export default intlSlice.reducer;
+export const { setLocale } = intlSlice.actions;

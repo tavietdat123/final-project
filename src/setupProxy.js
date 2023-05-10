@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const router = {
-  '/api': 'https://api.hrm.div4.pgtest.co/api/v1',
+  '/api': 'https://api-training.hrm.div4.pgtest.co/api/v1',
 };
 
 // eslint-disable-next-line no-undef
@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://api.hrm.div4.pgtest.co/api/v1',
+      target: 'https://api-training.hrm.div4.pgtest.co/api/v1',
       changeOrigin: true,
       secure: false,
       pathRewrite: {

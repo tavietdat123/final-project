@@ -1,14 +1,19 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { History } from 'history';
 import intlSlice, { IntlState } from '../modules/intl/redux/intlReducer';
-
+import authSlice, { initialStateAuth } from '../modules/auth/redux/authSlice';
+import employeeSilce, { InitialState } from '../modules/employee/redux/employeeSilce';
 export interface AppState {
   intl: IntlState;
+  auth: initialStateAuth;
+  employee: InitialState;
 }
 
-export default function rootReducer(history: History) {
+export default function rootReducer(routerReducer: any) {
   return combineReducers({
-    intl: intlSlice.reducer,
+    router: routerReducer,
+    intl: intlSlice,
+    auth: authSlice,
+    employee: employeeSilce,
   });
 }
 

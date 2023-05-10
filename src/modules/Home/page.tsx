@@ -1,5 +1,7 @@
+import ManagerLayout from '../../layout/ManagerLayout';
+
 function HomePage() {
-    return ( <></> );
+  return <ManagerLayout></ManagerLayout>;
 }
 
 export default HomePage;

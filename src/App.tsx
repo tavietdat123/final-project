@@ -1,8 +1,12 @@
-import { RootRoutes } from "./Routes";
+import { Toaster } from 'react-hot-toast';
+import { RootRoutes } from './Routes';
 
 function App() {
   return (
-    <RootRoutes/>
+    <>
+      <Toaster />
+      <RootRoutes />
+    </>
   );
 }
 

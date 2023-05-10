@@ -1,0 +1,109 @@
+.input {
+  line-height: 1.4375em;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: rgb(17, 24, 28);
+  box-sizing: border-box;
+  cursor: text;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  border-radius: 6px;
+  background-color: rgb(241, 243, 245);
+  overflow: hidden;
+  height: 47px;
+  border: none;
+  outline: none;
+  padding: 12px;
+}
+.input.error {
+  border: 1px solid rgb(243, 174, 175);
+  background-color: rgb(255, 239, 239);
+}
+.label {
+  margin: 0px;
+  line-height: 1.5;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.mes_error {
+  display: block;
+  color: rgb(229, 72, 77);
+  line-height: 1.5;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  margin: 5px 14px 0px;
+}
+.wrapper_btn {
+  .btn_submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    outline: 0px;
+    border: 0px;
+    margin: 28px 0px 0px;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    text-decoration: none;
+    font-weight: 400;
+    text-transform: capitalize;
+    min-width: 64px;
+    padding: 8px 22px;
+    color: rgb(251, 253, 255);
+    background-color: rgb(0, 145, 255);
+    width: 100%;
+    box-shadow: none;
+    border-radius: 6px;
+    height: 48px;
+    font-size: 16px;
+    &:hover {
+      text-decoration: none;
+      background-color: rgb(0, 129, 241);
+    }
+  }
+  .btn_submit.disabled {
+    background-color: rgba(193, 200, 205, 0.24);
+  }
+}
+.fogot {
+  line-height: 1.35714;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(0, 145, 255);
+  text-decoration: none;
+  margin: 16px 0px 0px;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.title_changePass {
+  margin: 10px 0px;
+  font-weight: 500;
+  line-height: 1.19444;
+  font-size: 36px;
+  letter-spacing: 0.5px;
+}
+.wrapper_repass {
+  color: rgb(17, 24, 28);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: rgb(241, 243, 245) 0px 5px 20px;
+  border-radius: 12px;
+  padding: 10px;
+  background-color: rgb(251, 252, 253);
+  margin-bottom: 10px;
+}
