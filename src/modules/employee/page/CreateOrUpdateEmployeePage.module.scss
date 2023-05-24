@@ -7,7 +7,6 @@
     font-weight: 500;
     line-height: 1.19444;
     font-size: 36px;
-    letter-spacing: 0.5px;
     color: rgb(17, 24, 28);
   }
 }
@@ -63,5 +62,29 @@
   height: 42px;
   &:hover {
     background-color: rgb(0, 129, 241);
+  }
+}
+.pannel {
+  display: none;
+}
+.btn.error {
+  color: rgb(229, 72, 77);
+  box-shadow: none;
+  border-radius: 6px;
+  height: 42px;
+  background-color: rgb(255, 239, 239);
+  min-width: 180px;
+  svg {
+    margin-left: 5px;
+  }
+  &:hover {
+    background-color: rgba(229, 72, 77, 0.08);
+  }
+}
+.btn.error.active {
+  color: rgb(255, 239, 239);
+  background-color: rgb(229, 72, 77);
+  &:hover {
+    background-color: rgb(220, 61, 67);
   }
 }

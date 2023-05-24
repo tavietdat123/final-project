@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { changePassWordService, getDetailUser, getTokenUser } from '../authService';
+import { changePassWordService, forgotPasswordService, getDetailUser, getTokenUser } from '../authService';
 import Cookies from 'js-cookie';
 import { ACCESS_TOKEN_KEY } from '../../../utils/constants';
 import { ROUTES } from '../../../configs/routes';
@@ -8,15 +8,19 @@ import toastMessage from '../../../component/toast/Toast';
 export interface initialStateAuth {
   loading: boolean;
   detailUser: any;
+  loadingForgot: boolean;
 }
 const initialState: initialStateAuth = {
   loading: false,
   detailUser: {},
+  loadingForgot: false,
 };
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutAuth: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getToken.pending, (state) => {
@@ -42,6 +46,17 @@ const authSlice = createSlice({
       })
       .addCase(changePassWord.rejected, (state, action: any) => {
         state.loading = false;
+        toastMessage('error', action.payload.message);
+      })
+      .addCase(forgotPassWord.pending, (state) => {
+        state.loadingForgot = true;
+      })
+      .addCase(forgotPassWord.fulfilled, (state, action: any) => {
+        state.loadingForgot = false;
+        toastMessage('success', 'Please check your email and change your password');
+      })
+      .addCase(forgotPassWord.rejected, (state, action: any) => {
+        state.loadingForgot = false;
         toastMessage('error', action.payload.message);
       });
   },
@@ -71,10 +86,9 @@ export const getDetail = createAsyncThunk('auth/getdetail', async () => {
 });
 export const changePassWord = createAsyncThunk<void, any, {}>(
   'auth/changepassword',
-  async (data, { rejectWithValue, dispatch }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const res = await changePassWordService(data);
-      console.log(res.data);
       return res.data;
     } catch (err: any) {
       const error = err.response.data;
@@ -82,4 +96,18 @@ export const changePassWord = createAsyncThunk<void, any, {}>(
     }
   },
 );
+export const forgotPassWord = createAsyncThunk<void, any, {}>(
+  'auth/forgotpassWord',
+  async (data, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await forgotPasswordService(data);
+      dispatch(push(ROUTES.login));
+      return res.data;
+    } catch (err: any) {
+      const error = err.response.data;
+      return rejectWithValue(error);
+    }
+  },
+);
+export const { logoutAuth } = authSlice.actions;
 export default authSlice.reducer;

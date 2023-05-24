@@ -12,16 +12,18 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import icons from '../assets/icons';
 import { FormattedMessage } from 'react-intl';
-import { Backdrop, MenuItem, Select } from '@mui/material';
+import { Backdrop, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import classNames from 'classnames/bind';
 import styles from './ManagerLayout.module.scss';
 import Deltai from './componentLayout/DetailUser';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, ChangeEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { navListMain, navListMore } from '../modules/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailUserSelector } from '../modules/auth/redux/authSelector';
 import { getDetail } from '../modules/auth/redux/authSlice';
+import { localeSelector } from '../modules/intl/redux/intlSelector';
+import { setLocale } from '../modules/intl/redux/intlReducer';
 const drawerWidth = 329;
 const cx = classNames.bind(styles);
 const lang = [
@@ -41,7 +43,7 @@ function ManagerLayout({ children }: any) {
   const location = useLocation();
   const [detailUser, setDetailUser] = useState(false);
   const detail = useSelector(detailUserSelector);
-
+  const locale = useSelector(localeSelector);
   const dispatch = useDispatch();
   const handleCloseDetailUser = useCallback(() => {
     setDetailUser(false);
@@ -55,6 +57,9 @@ function ManagerLayout({ children }: any) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const handleChangeLang = (e: SelectChangeEvent<string>) => {
+    dispatch(setLocale(e.target.value));
+  };
   const drawer = (
     <div>
       <Toolbar />
@@ -69,7 +74,7 @@ function ManagerLayout({ children }: any) {
                 <ListItemIcon>
                   <img src={el.icon} alt="" />
                 </ListItemIcon>
-                <ListItemText primary={el.title} />
+                <ListItemText className={cx('title_btn')} primary={el.title} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -86,7 +91,7 @@ function ManagerLayout({ children }: any) {
               <ListItemIcon>
                 <img src={el.icon} alt="" />
               </ListItemIcon>
-              <ListItemText primary={el.title} />
+              <ListItemText className={cx('title_btn')} primary={el.title} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -101,13 +106,12 @@ function ManagerLayout({ children }: any) {
         position="fixed"
         sx={{
           width: '100%',
-          zIndex: '2',
+          zIndex: '9',
           backgroundColor: '#fff',
           boxShadow: 'rgb(236, 238, 240) 0px 3px 15px',
           height: '60px',
         }}
       >
-        {' '}
         <Toolbar>
           <div>
             <img src={icons.logo} alt="" width={36} height={36} style={{ marginLeft: '6px', marginRight: '16px' }} />
@@ -116,13 +120,19 @@ function ManagerLayout({ children }: any) {
             variant="h4"
             noWrap
             component="div"
-            style={{ color: 'var(--text-color)', fontSize: '24px', fontWeight: '500', flex: 1 }}
+            style={{
+              color: 'var(--text-color)',
+              fontSize: '24px',
+              fontWeight: '500',
+              flex: 1,
+              fontFamily: 'SofiaPro-Medium',
+            }}
           >
             <FormattedMessage id="titleAuthLayout" />
           </Typography>
           <div className={cx('btn_header')}>
             <div>
-              <Select defaultValue="en" className="btn_lang">
+              <Select defaultValue={locale} onChange={handleChangeLang} value={locale} className="btn_lang">
                 {lang.map((el, index) => (
                   <MenuItem value={el.value} className="lang_item" key={index}>
                     <div className={cx('btn_lag')}>

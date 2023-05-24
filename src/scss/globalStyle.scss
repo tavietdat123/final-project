@@ -1,20 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 :root {
   --black: #000;
   --white: #fff;
   --text-color: #11181c;
 }
+@font-face {
+  font-family: 'SofiaPro-Regular';
+  src: url('../assets/font/SVN-SofiaPro-Regular.5b3d1be43dce9b034c9f.woff2');
+}
+@font-face {
+  font-family: 'SofiaPro-Medium';
+  src: url('../assets/font/SVN-SofiaPro-Medium.f29daefe0725dbae93c7.woff2');
+}
+html {
+  body {
+    line-height: 1.5;
+    text-rendering: optimizespeed;
+    font-family: 'SofiaPro-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--text-color);
+    padding: 0 !important;
+  }
+}
 body {
-  line-height: 1.5;
-  text-rendering: optimizespeed;
-  font-family: 'Roboto', sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  color: var(--text-color);
-  padding: 0 !important;
-
   .MuiSelect-select {
     padding: 12px 32px 12px 12px;
     border: none;
@@ -104,7 +114,6 @@ body {
     color: inherit;
     line-height: 1.5;
     font-size: 16px;
-    letter-spacing: -0.01em;
     font-weight: 400;
     display: flex;
     -webkit-box-pack: start;
@@ -302,6 +311,137 @@ body {
       border: none;
       outline: none;
       background-color: rgb(241, 243, 245);
+    }
+  }
+  .react-datepicker {
+    border: 1px solid #dfe3e6;
+  }
+  .react-datepicker__triangle {
+    &::after {
+      display: none;
+    }
+    &::before {
+      display: none;
+    }
+    background-color: #fff;
+  }
+  .react-datepicker-popper {
+    padding: 5px;
+    z-index: 99999;
+  }
+  .react-datepicker__header {
+    background-color: #fff;
+  }
+  .react-datepicker__day-names,
+  .react-datepicker__week {
+    margin: 6px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  .react-datepicker__week {
+    padding: 0 4px;
+    margin: 0;
+  }
+  .react-datepicker__day-name {
+    margin: 0 2px;
+    line-height: 1.35714;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(48, 164, 108);
+    background-color: rgb(233, 249, 238);
+    padding: 8px 13.5px;
+    border-radius: 6px;
+    width: unset;
+  }
+  .react-datepicker__header {
+    border: none;
+  }
+  .react-datepicker__day {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    &:hover {
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+    }
+  }
+  .react-datepicker__day--outside-month {
+    color: #c1c8cd;
+  }
+  .react-datepicker__day--keyboard-selected {
+    background-color: #0091ff !important;
+    color: #fff;
+  }
+}
+body {
+  .select__control {
+    border: none;
+    outline: none;
+    padding: 4px 0;
+  }
+  .select__input-container {
+    margin: 0;
+    padding: 6px 4px;
+  }
+  .select__menu-list {
+    padding: 8px 10px;
+    max-height: 200px;
+  }
+  .select__menu {
+    z-index: 9;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+  .select__option {
+    box-sizing: border-box;
+    white-space: nowrap;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 400;
+    &:hover {
+      background-color: rgba(193, 200, 205, 0.08);
+      color: rgb(48, 164, 108);
+    }
+  }
+  .select__option.select__option--is-selected {
+    background-color: rgb(233, 249, 238);
+    color: rgb(48, 164, 108);
+    &:hover {
+      background-color: rgb(221, 243, 228);
+    }
+  }
+  .select__value-container {
+    max-height: 150px;
+    overflow: auto;
+  }
+  .select__multi-value {
+    border-radius: 6px;
+    background-color: white;
+    margin: 2px;
+    display: inline-flex;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 32px;
+  }
+  .select__multi-value__label {
+    color: rgb(0, 145, 255) !important;
+  }
+  .select__multi-value__remove {
+    &:hover {
+      background-color: unset;
+      color: unset;
     }
   }
 }

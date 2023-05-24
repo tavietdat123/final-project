@@ -1,3 +1,4 @@
+import { forgotPassWord } from './redux/authSlice';
 import axios from 'axios';
 import { API_PATHS } from '../../configs/api';
 import { FormDataSignin } from './pages/LoginPage';
@@ -21,4 +22,7 @@ export const changePassWordService = (data: FormDataChangePass) => {
       Authorization: `Bearer ${Cookies.get(ACCESS_TOKEN_KEY)}`,
     },
   });
+};
+export const forgotPasswordService = (data: { email: string }) => {
+  return axios.post(API_PATHS.forgotPassword, data);
 };

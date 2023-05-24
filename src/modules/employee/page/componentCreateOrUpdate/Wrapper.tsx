@@ -1,4 +1,5 @@
 import Line from '../../../../component/line/Line';
+import { memo } from 'react';
 
 function Wrapper({ children, title }: { children: React.ReactNode; title: string }) {
   return (
@@ -22,4 +23,4 @@ function Wrapper({ children, title }: { children: React.ReactNode; title: string
     </div>
   );
 }
-export default Wrapper;
+export default memo(Wrapper);

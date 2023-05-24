@@ -6,22 +6,26 @@ import classNames from 'classnames/bind';
 import styles from './auth.module.scss';
 import { CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { loadingAuthSelector } from '../redux/authSelector';
-import { useSelector } from 'react-redux';
+import { loadingAuthSelector, loadingForgotSelector } from '../redux/authSelector';
+import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../configs/routes';
+import { forgotPassWord } from '../redux/authSlice';
 const cx = classNames.bind(styles);
 export interface FormDataForgot {
   email: string;
 }
 function ForgotPasswordPage() {
-  const loading = useSelector(loadingAuthSelector);
+  const loading = useSelector(loadingForgotSelector);
+  const dispatch = useDispatch();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormDataForgot>();
-  const onSubmit = (data: FormDataForgot) => {};
+  const onSubmit = (data: FormDataForgot) => {
+    dispatch<any>(forgotPassWord(data));
+  };
   return (
     <AuthLayout title="titlePageForgotPassword">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,9 +55,8 @@ function ForgotPasswordPage() {
           </Col>
           <Col md={12} className={cx('wrapper_btn')}>
             <Button className={cx('btn_submit', 'mt-1', { disabled: loading })} type="submit" disabled={loading}>
-              {(loading && <CircularProgress style={{ color: 'rgba(193, 200, 205, 0.8)' }} size={17} />) || (
-                <FormattedMessage id="signin" />
-              )}
+              {(loading && <CircularProgress style={{ color: 'rgba(193, 200, 205, 0.8)' }} size={17} />) ||
+                'Confirm & Send OTP'}
             </Button>
           </Col>
           <Col md={12} className="d-flex justify-content-center">

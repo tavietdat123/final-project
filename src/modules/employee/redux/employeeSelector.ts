@@ -1,7 +1,6 @@
 import { AppState } from '../../../redux/reducer';
 
 export const loadingEmployeeSelector = (state: AppState) => state.employee.loadingEmployee;
-export const employeeSelector = (state: AppState) => state.employee.employee;
 export const nextPageEmployeeSelector = (state: AppState) => state.employee.nextPage;
 export const prevPageEmployeeSelector = (state: AppState) => state.employee.prevPage;
 export const firstPageEmployeeSelector = (state: AppState) => state.employee.firstPage;
@@ -12,3 +11,16 @@ export const currentPageEmployeeSelector = (state: AppState) => state.employee.c
 export const fromPageEmployeeSelector = (state: AppState) => state.employee.fromPage;
 export const toPageEmployeeSelector = (state: AppState) => state.employee.toPage;
 export const totalEmployeeSelector = (state: AppState) => state.employee.totalEmployee;
+export const marriageEmployeeSelector = (state: AppState) => state.managerEmployee.marriage;
+export const positionEmployeeSelector = (state: AppState) => state.managerEmployee.position;
+export const departmentEmployeeSelector = (state: AppState) => state.managerEmployee.department;
+export const defaultSalaryEmployeeSelector = (state: AppState) => state.managerEmployee.defaultSalary;
+export const benefitEmployeeSelector = (state: AppState) => state.managerEmployee.benefit;
+export const gradeEmployeeSelector = (state: AppState) => state.managerEmployee.grade;
+export const employeeSelector = (state: AppState) => state.employee.employee;
+export const multipleUploadTableSelector = (state: AppState) => state.managerEmployee.multipleUpload;
+export const uploadTableSelector = (state: AppState) => state.managerEmployee.upload;
+export const currentEmpolyeeSelector = (state: AppState) => state.managerEmployee.currentEmployee;
+export const listDeleteUpdateSelector = (state: AppState) => state.managerEmployee.listDeleteUpdate;
+export const loadingAddOrUpdateSelector = (state: AppState) => state.managerEmployee.loadingAddOrUpdate;
+export const getStateDeleteEmployeeSelector = (state: AppState) => state.managerEmployee.deleteSuccess;

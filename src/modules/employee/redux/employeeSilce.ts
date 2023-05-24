@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getEmployeeByPageService, getEmployeeService } from '../employeeService';
+import { getEmployeeByPageService, getEmployeeService, searchEmployeeService } from '../employeeService';
 export interface InitialState {
   employee: any;
   loadingEmployee: boolean;
@@ -28,10 +28,12 @@ const initialState: InitialState = {
   toPage: null,
   totalEmployee: null,
 };
-const employeeSilce = createSlice({
+const employeeSilce: any = createSlice({
   name: 'employee',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutEmployee: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getEmployee.pending, (state) => {
@@ -67,13 +69,32 @@ const employeeSilce = createSlice({
         state.fromPage = action.payload.data.from;
         state.toPage = action.payload.data.to;
         state.totalEmployee = action.payload.data.total;
+      })
+      .addCase(searchEmployee.pending, (state, action) => {
+        state.loadingEmployee = true;
+      })
+      .addCase(searchEmployee.fulfilled, (state, action) => {
+        state.loadingEmployee = false;
+        state.employee = action.payload.data.data;
+        state.nextPage = action.payload.data.next_page_url;
+        state.prevPage = action.payload.data.prev_page_url;
+        state.firstPage = action.payload.data.first_page_url;
+        state.lastPage = action.payload.data.last_page_url;
+        state.listPage = action.payload.data.links;
+        state.totalPage = action.payload.data.last_page;
+        state.currentPage = action.payload.data.current_page;
+        state.fromPage = action.payload.data.from;
+        state.toPage = action.payload.data.to;
+        state.totalEmployee = action.payload.data.total;
+      })
+      .addCase(searchEmployee.rejected, (state, action) => {
+        state.loadingEmployee = false;
       });
   },
 });
 export const getEmployee = createAsyncThunk('employee/getemployee', async () => {
   try {
     const res = await getEmployeeService();
-    console.log(res);
     return res.data;
   } catch (error) {
     console.log(error);
@@ -87,4 +108,13 @@ export const getEmployeeByPage = createAsyncThunk('employee/getemployeebypage', 
     console.log(error);
   }
 });
+export const searchEmployee = createAsyncThunk('employee/searchemployee', async (data: string) => {
+  try {
+    const res = await searchEmployeeService(data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+export const { logoutEmployee } = employeeSilce.actions;
 export default employeeSilce.reducer;

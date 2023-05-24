@@ -4,17 +4,42 @@ import styles from './TableEmployee.module.scss';
 import { columns } from './TableEmployee';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { EmployeeType, GenderCode } from '../../../../component/enums';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../../configs/routes';
 const cx = classNames.bind(styles);
-function TableItem({ data, checked }: any) {
+function TableItem({ data, checked, handleSetDelete, unCheck, deleteEmployee }: any) {
   const [active, setActive] = useState(false);
-  const handleChangeActive = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeActive = (event: ChangeEvent<HTMLInputElement>) => {
+    setActive(event.target.checked);
+  };
+  const handleChangeActiveClick = () => {
     setActive(!active);
   };
+  const navigate = useNavigate();
+  useEffect(() => {
+    handleSetDelete(data.id, active);
+  }, [active]);
   useEffect(() => {
     setActive(checked);
-  }, [checked]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked, unCheck]);
+  const handleDoubleClickAdd = () => {
+    navigate(`${ROUTES.createOrUpdateEmployee}/${data.id}`);
+  };
+  useEffect(() => {
+    if (deleteEmployee.some((el: any) => el === data.id)) {
+      setActive(true);
+    }
+  }, []);
   return (
-    <TableRow className={cx('tr_body', { active })} role="checkbox" tabIndex={-1}>
+    <TableRow
+      className={cx('tr_body', { active })}
+      onClick={handleChangeActiveClick}
+      onDoubleClick={handleDoubleClickAdd}
+      role="checkbox"
+      tabIndex={-1}
+    >
       <TableCell align="center" className={cx('td_body')} style={{ minWidth: '36px', padding: 0, textAlign: 'center' }}>
         <Checkbox
           className={cx('check_box')}

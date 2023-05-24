@@ -4,8 +4,8 @@ export interface IntlState {
   readonly locale: string;
 }
 const currentLang = localStorage.getItem(LS_LANG);
-const initialState: IntlState = { locale: currentLang ?? 'vi' };
-const intlSlice = createSlice({
+const initialState: IntlState = { locale: currentLang ?? 'en' };
+const intlSlice: any = createSlice({
   name: 'intl',
   initialState,
   reducers: {

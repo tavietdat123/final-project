@@ -10,14 +10,12 @@ import { createReduxHistoryContext } from 'redux-first-history';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [], // Danh sách các reducer mà bạn muốn lưu trữ trạng thái của chúng
+  whitelist: [],
 };
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
-  //other options if needed
 });
 
-// export const history = createBrowserHistory();
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: false,

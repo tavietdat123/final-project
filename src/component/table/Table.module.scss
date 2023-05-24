@@ -1,0 +1,29 @@
+.wrapper_table {
+  width: 100%;
+  overflow: auto;
+}
+.table_container {
+  position: relative;
+  max-height: 525px;
+  min-height: 525px;
+  &::-webkit-scrollbar {
+    border-radius: 0px;
+    width: 9px;
+    height: 9px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #d7dbdf;
+    &:hover {
+      background-color: #c1c8cd;
+    }
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: #f1f3f5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+  }
+}

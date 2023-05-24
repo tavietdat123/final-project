@@ -78,7 +78,6 @@
     line-height: 1.5;
     font-size: 16px;
     font-weight: 400;
-    letter-spacing: 0.5px;
     color: rgb(17, 24, 28);
     &:first-child {
       margin-bottom: 10px;
@@ -113,6 +112,7 @@
   color: rgb(0, 106, 220);
   text-transform: capitalize;
   letter-spacing: 0.5px;
+  font-family: 'SofiaPro-Medium';
 }
 .title_list2 {
   margin: 0px;
@@ -121,6 +121,7 @@
   font-size: 24px;
   letter-spacing: 0.5px;
   text-transform: capitalize;
+  font-family: 'SofiaPro-Medium';
 }
 .footer {
   padding: 32px;
@@ -130,4 +131,7 @@
   font-weight: 400;
   color: rgb(104, 112, 118);
   text-align: center;
+}
+.title_btn {
+  font-family: 'SofiaPro-Regular';
 }

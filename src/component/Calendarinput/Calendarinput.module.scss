@@ -1,0 +1,42 @@
+.errorDate {
+  background-color: rgb(255, 239, 239) !important;
+}
+.btn_icon {
+  width: 32px;
+  height: 32px;
+  svg {
+    color: #687076;
+    font-size: 20px;
+  }
+}
+.wrapper_header {
+  padding: 4px 8px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+}
+.title_header {
+  margin: 0px;
+  font-weight: 400;
+  line-height: 1.38889;
+  font-size: 18px;
+}
+body {
+  .btn_year {
+    outline: 0px;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    user-select: none;
+    color: inherit;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 100px;
+    min-width: 0;
+    svg {
+      color: #687076;
+      font-size: 16px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Breadcrumb.module.scss';
 import { ROUTES } from '../../configs/routes';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { memo } from 'react';
 const cx = classNames.bind(styles);
 interface Props {
   routeSegments: RouteSegments[];
@@ -33,4 +34,4 @@ const Breadcrumb = ({ routeSegments }: Props) => {
   );
 };
 
-export default Breadcrumb;
+export default memo(Breadcrumb);

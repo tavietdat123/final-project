@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ROUTES } from '../configs/routes';
 import PrivateRoute from '../modules/common/components/PrivateRoute';
 import AuthRoute from '../modules/common/components/AuthRoute';
@@ -53,6 +53,7 @@ export const RootRoutes = () => {
             </PrivateRoute>
           }
         />
+
         <Route
           path={ROUTES.changePassword}
           element={
@@ -64,6 +65,14 @@ export const RootRoutes = () => {
         <Route path="*" element={<NotFound />} />
         <Route
           path={ROUTES.createOrUpdateEmployee}
+          element={
+            <PrivateRoute>
+              <CreateOrUpdateEmployeePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${ROUTES.createOrUpdateEmployee}/:id`}
           element={
             <PrivateRoute>
               <CreateOrUpdateEmployeePage />
