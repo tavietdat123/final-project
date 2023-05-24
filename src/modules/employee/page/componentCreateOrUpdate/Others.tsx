@@ -13,7 +13,6 @@ import { DeleteIcon, UploadIcon } from '../../../../component/icons';
 import Table from '../../../../component/table/Table';
 import { ChangeEvent, memo } from 'react';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { get } from 'http';
 import { deleteUpload, setUpload } from '../../redux/managerEmployeeSlice';
 import moment from 'moment';
 const cx = classNames.bind(styles);
@@ -55,7 +54,7 @@ function Others({ data, handlleData }: { data: any; handlleData: (data: any) => 
     label: el.name,
   }));
 
-  const { control, handleSubmit, getValues } = useForm<FormDataO>({
+  const { control, handleSubmit,  } = useForm<FormDataO>({
     mode: 'onBlur',
   });
   const { ClearIndicator } = components;

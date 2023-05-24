@@ -18,6 +18,7 @@ function TableItem({ data, checked, handleSetDelete, unCheck, deleteEmployee }: 
   const navigate = useNavigate();
   useEffect(() => {
     handleSetDelete(data.id, active);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
   useEffect(() => {
     setActive(checked);
@@ -31,6 +32,7 @@ function TableItem({ data, checked, handleSetDelete, unCheck, deleteEmployee }: 
     if (deleteEmployee.some((el: any) => el === data.id)) {
       setActive(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <TableRow

@@ -193,6 +193,7 @@ function TableEmployee() {
       handleCloseDelete();
       dispatch(resetSuccessDeleteEmployee());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getStateDeleteEmployee]);
   const handleYesDelete = () => {
     const check = employeeList.every((employee: any) => {

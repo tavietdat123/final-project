@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getToken } from '../redux/authSlice';
 import { loadingAuthSelector } from '../redux/authSelector';
 import { ROUTES } from '../../../configs/routes';
-import { employeeSelector } from '../../employee/redux/employeeSelector';
 const cx = classNames.bind(styles);
 export interface FormDataSignin {
   username: string;

@@ -43,8 +43,6 @@ function ContractInformation({
   const {
     control,
     handleSubmit,
-    getValues,
-    watch,
     formState: { errors },
   } = useForm<FormDataCI>({
     mode: 'onBlur',
@@ -53,26 +51,7 @@ function ContractInformation({
   const currentEmpolyee = useSelector(currentEmpolyeeSelector);
 
   const onSubmit = (data: FormDataCI) => {};
-  // useEffect(() => {
-  //   return () => {
-  //     const fieldsToCheck: ('contract_start_date' | 'type')[] = ['contract_start_date', 'type'];
 
-  //     let isError = false;
-  //     fieldsToCheck.forEach((el) => {
-  //       const value = watch(el);
-  //       if (value === '') {
-  //         isError = true;
-  //       }
-  //       return;
-  //     });
-
-  //     if (isError) {
-  //       handleError(1);
-  //     } else {
-  //       handleError(1, true);
-  //     }
-  //   };
-  // }, []);
   useEffect(() => {
     const fieldsToCheck: ('contract_start_date' | 'type')[] = ['contract_start_date', 'type'];
     let test = true;

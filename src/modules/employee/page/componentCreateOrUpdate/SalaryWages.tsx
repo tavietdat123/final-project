@@ -30,8 +30,6 @@ function SalaryWages({
   const {
     control,
     handleSubmit,
-    setValue,
-    watch,
     formState: { errors },
   } = useForm<FormDataSW>({
     mode: 'onBlur',

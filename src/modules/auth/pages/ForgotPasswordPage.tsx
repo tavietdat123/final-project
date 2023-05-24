@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import styles from './auth.module.scss';
 import { CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { loadingAuthSelector, loadingForgotSelector } from '../redux/authSelector';
+import { loadingForgotSelector } from '../redux/authSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROUTES } from '../../../configs/routes';
 import { forgotPassWord } from '../redux/authSlice';

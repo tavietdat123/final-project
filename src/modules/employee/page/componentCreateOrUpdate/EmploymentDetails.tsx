@@ -23,9 +23,6 @@ function EmploymentDetails({ data, handlleData }: { data: any; handlleData: (dat
   const {
     control,
     handleSubmit,
-    watch,
-    setValue,
-    getValues,
     formState: { errors },
   } = useForm<FormDataED>({
     mode: 'onBlur',

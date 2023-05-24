@@ -7,7 +7,6 @@ import { Button, ClickAwayListener, IconButton, MenuItem, MenuList, Paper, Poppe
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useEffect, useRef, useState } from 'react';
 import CheckIcon from '@mui/icons-material/Check';
-import moment from 'moment';
 const cx = classNames.bind(styles);
 
 interface PropsCalendarinput {
@@ -19,12 +18,11 @@ interface PropsCalendarinput {
 function Calendarinput({ field, error, value }: PropsCalendarinput) {
   const now = new Date();
   const year = now.getFullYear();
-  const years = [year]; // Khởi tạo mảng với phần tử đầu tiên là năm hiện tại
+  const years = [year];
   for (let i = 1; i < 30; i++) {
-    years.push(years[i - 1] - 1); // Thêm phần tử mới vào mảng là phần tử trước -1
+    years.push(years[i - 1] - 1);
   }
   const month = now.getMonth();
-  const [currentYear, getCurrentYear] = useState(year);
 
   const [currentMonth, setCurrentMonth] = useState(month);
   const handleNextMonth = () => {

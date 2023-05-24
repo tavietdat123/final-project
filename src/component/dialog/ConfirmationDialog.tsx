@@ -1,6 +1,7 @@
 import { Dialog, Button, DialogActions, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CloseIcon from '@mui/icons-material/Close';
+import { memo } from 'react';
 interface PropsConfirmationDialog {
   open: boolean;
   onConfirmDialogClose: () => void;
@@ -96,4 +97,4 @@ const ConfirmationDialog = ({
   );
 };
 
-export default ConfirmationDialog;
+export default memo(ConfirmationDialog);

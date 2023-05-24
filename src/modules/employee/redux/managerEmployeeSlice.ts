@@ -17,7 +17,6 @@ import toastMessage from '../../../component/toast/Toast';
 import { push } from 'redux-first-history';
 import { ROUTES } from '../../../configs/routes';
 import { getEmployee } from './employeeSilce';
-import { type } from 'os';
 export interface InitialStateManagerEmployee {
   marriage: any;
   position: any;

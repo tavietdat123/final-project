@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Table.module.scss';
 import { Paper, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import Line from '../line/Line';
+import { memo } from 'react';
 const cx = classNames.bind(styles);
 interface Props {
   renderHead: React.ReactNode;
@@ -30,4 +31,4 @@ function Table({ renderHead, renderBody, pagition, classContainer, classWrapper 
   );
 }
 
-export default Table;
+export default memo(Table);
