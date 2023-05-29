@@ -76,15 +76,7 @@ function Calendarinput({ field, error, value }: PropsCalendarinput) {
       className={cx('width', { errorDate: error })}
       popperPlacement="bottom-start"
       dateFormat="yyyy-MM-dd"
-      renderCustomHeader={({
-        date,
-        changeYear,
-        changeMonth,
-        decreaseMonth,
-        increaseMonth,
-        prevMonthButtonDisabled,
-        nextMonthButtonDisabled,
-      }) => {
+      renderCustomHeader={({ date, changeYear, changeMonth }) => {
         return (
           <div className={cx('wrapper_header')}>
             <IconButton

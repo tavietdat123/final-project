@@ -16,7 +16,7 @@ import {
 import toastMessage from '../../../component/toast/Toast';
 import { push } from 'redux-first-history';
 import { ROUTES } from '../../../configs/routes';
-import { getEmployee } from './employeeSilce';
+import { getEmployeeByPage } from './employeeSilce';
 export interface InitialStateManagerEmployee {
   marriage: any;
   position: any;
@@ -47,7 +47,7 @@ const initialState: InitialStateManagerEmployee = {
   loadingAddOrUpdate: false,
   deleteSuccess: false,
 };
-const managerEmployeeSilce = createSlice({
+const managerEmployeeSilce: any = createSlice({
   name: 'managerEmployee',
   initialState,
   reducers: {
@@ -334,9 +334,9 @@ export const deleteMultipleEmployee = createAsyncThunk(
   'managerEmployee/deletemultipleemployee',
   async (data: any, { rejectWithValue, dispatch }) => {
     try {
-      const res = await deleteEmployeeService(data);
+      const res = await deleteEmployeeService(data.data);
       if (res) {
-        dispatch<any>(getEmployee());
+        dispatch<any>(getEmployeeByPage(data.url));
       }
       return res.data;
     } catch (error: any) {

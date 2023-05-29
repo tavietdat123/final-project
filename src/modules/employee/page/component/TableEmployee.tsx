@@ -70,7 +70,6 @@ export const columns: readonly Column[] = [
 function TableEmployee() {
   const [checked, setChecked] = useState(false);
   const [unCheck, setUnCheck] = useState(false);
-  const [active, setActive] = useState(false);
   const [deleteEmployee, setDeleteEmployee] = useState<number[]>([]);
   const loading = useSelector(loadingEmployeeSelector);
   const employeeList = useSelector(employeeSelector);
@@ -92,6 +91,7 @@ function TableEmployee() {
   const searchParams = new URLSearchParams(location.search);
   const page = searchParams.get('page');
   const searchValue = searchParams.get('search');
+
   useEffect(() => {
     if (searchValue) {
       dispatch<any>(searchEmployee(`${searchValue}&page=1`));
@@ -108,7 +108,12 @@ function TableEmployee() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, searchValue]);
   useLayoutEffect(() => {
-    if (page && parseInt(lastPage.substring(lastPage.lastIndexOf('=') + 1)) > 0 && employeeList.length === 0) {
+    if (
+      page &&
+      parseInt(lastPage.substring(lastPage.lastIndexOf('=') + 1)) > 0 &&
+      employeeList.length === 0 &&
+      !searchValue
+    ) {
       const page = lastPage.substring(lastPage.lastIndexOf('=') + 1);
       navigate(`/employee?page=${page}`);
     }
@@ -123,21 +128,46 @@ function TableEmployee() {
       setDeleteEmployee((prev) => {
         return prev.filter((el) => el !== number);
       });
+
       return;
-    }
-    setDeleteEmployee((prev) => [...prev, number]);
+    } else
+      setDeleteEmployee((prev) => {
+        if (prev.some((el) => el === number)) {
+          return prev;
+        }
+        return [...prev, number];
+      });
   }, []);
   const handleOnDelete = () => {
     setOndelete(true);
   };
   const handleChecked = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.checked) {
+    setChecked(event.target.checked);
+    if (event.target.checked) {
+      setDeleteEmployee((prev) => {
+        return [...new Set([...prev, ...employeeList.map((el: any) => el.id)])];
+      });
+    } else {
       setDeleteEmployee([]);
     }
-    setChecked(event.target.checked);
-    setActive(event.target.checked);
-    setUnCheck(!unCheck);
   };
+  useLayoutEffect(() => {
+    if (employeeList.length !== 0) {
+      const check = employeeList.every((employee: any) => {
+        if (!!deleteEmployee.find((el) => el === employee.id)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (check) {
+        setChecked(true);
+      } else {
+        setChecked(false);
+      }
+    }
+  }, [deleteEmployee, employeeList]);
+
   const handleFirstPage = () => {
     const page = firstPage.substring(firstPage.lastIndexOf('=') + 1);
     if (searchValue) {
@@ -196,6 +226,7 @@ function TableEmployee() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getStateDeleteEmployee]);
   const handleYesDelete = () => {
+    let test = false;
     const check = employeeList.every((employee: any) => {
       if (!!deleteEmployee.find((el) => el === employee.id)) {
         return true;
@@ -206,29 +237,19 @@ function TableEmployee() {
     if (check) {
       if (page === lastPage.substring(lastPage.lastIndexOf('=') + 1)) {
         const newPage = parseInt(page) - 1;
+        test = true;
         navigate(`/employee?page=${newPage}`);
       }
     }
-    dispatch<any>(deleteMultipleEmployee(deleteEmployee));
+    dispatch<any>(
+      deleteMultipleEmployee({
+        data: deleteEmployee,
+        url: `${API_PATHS.searchEmployee}${searchValue ? searchValue : ''}&page=${
+          currentpage !== 1 && test ? currentpage - 1 : currentpage
+        }`,
+      }),
+    );
   };
-  useLayoutEffect(() => {
-    if (employeeList.length !== 0) {
-      const check = employeeList.every((employee: any) => {
-        if (!!deleteEmployee.find((el) => el === employee.id)) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      if (check) {
-        setChecked(true);
-      } else {
-        setChecked(false);
-        setActive(false);
-      }
-    }
-  }, [deleteEmployee, employeeList]);
-
   return (
     <div className={cx('wrapper')}>
       <div className="d-flex justify-content-end">
@@ -320,14 +341,7 @@ function TableEmployee() {
 
             {employeeList.map((row: any, index: number) => {
               return (
-                <TableItem
-                  checked={active}
-                  handleSetDelete={handleSetDelete}
-                  unCheck={unCheck}
-                  data={row}
-                  key={row.id}
-                  deleteEmployee={deleteEmployee}
-                />
+                <TableItem handleSetDelete={handleSetDelete} data={row} key={row.id} deleteEmployee={deleteEmployee} />
               );
             })}
           </>

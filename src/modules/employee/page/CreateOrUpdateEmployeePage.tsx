@@ -4,7 +4,7 @@ import { ROUTES } from '../../../configs/routes';
 import ManagerLayout from '../../../layout/ManagerLayout';
 import classNames from 'classnames/bind';
 import styles from './CreateOrUpdateEmployeePage.module.scss';
-import { Box, Button } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 import { memo, useCallback, useEffect, useState } from 'react';
 import EmployeeInformation from './componentCreateOrUpdate/EmployeeImformation';
 import EmploymentDetails from './componentCreateOrUpdate/EmploymentDetails';
@@ -146,7 +146,6 @@ function CreateOrUpdateEmployeePage() {
       dispatch(resetMultipleUpload());
       dispatch(resetUpload());
       dispatch(resetCurrentEmployee());
-
       dispatch(resetListDeleteUpdate());
       dispatch(resetListDeleteDocumentUpdate());
     };
@@ -164,12 +163,25 @@ function CreateOrUpdateEmployeePage() {
   const handleAddEmployee = () => {
     const newFormValue = {
       ...formValues,
-      grade_id: formValues.grade_id && Object.keys(formValues.grade_id).length !== 0 ? formValues.grade_id.value : null,
-      grade:
-        formValues.grade_id && Object.keys(formValues.grade_id).length !== 0
+      grade_id: formValues.grade_id
+        ? formValues.grade_id.value
+          ? formValues.grade_id.value
+          : formValues.grade_id
+        : null,
+      grade: formValues.grade_id
+        ? formValues.grade_id.value
           ? gradeList.find((el: any) => el.id === formValues.grade_id.value)
-          : null,
-      benefits: formValues.benefits.length !== 0 ? formValues.benefits.map((el: any) => el.value) : [],
+          : gradeList.find((el: any) => el.id === formValues.grade_id)
+        : null,
+      benefits:
+        formValues.benefits.length !== 0
+          ? formValues.benefits.map((el: any) => {
+              if (el.id) {
+                return parseInt(el.id);
+              }
+              return el.value;
+            })
+          : [],
       contract_start_date: moment(formValues.contract_start_date).format('YYYY-MM-DD'),
       dob: moment(formValues.dob).format('YYYY-MM-DD'),
     };
@@ -197,7 +209,15 @@ function CreateOrUpdateEmployeePage() {
           className={cx('btn_add', { disabled: !onAdd || errors.length !== 0 || loading })}
           onClick={handleAddEmployee}
         >
-          {id ? 'Save change' : 'Add'}
+          {!loading ? (
+            id ? (
+              'Save change'
+            ) : (
+              'Add'
+            )
+          ) : (
+            <CircularProgress style={{ color: 'rgba(193, 200, 205, 0.8)' }} size={17} />
+          )}
         </Button>
       </div>
       <div className={cx('wrapper_btn')}>

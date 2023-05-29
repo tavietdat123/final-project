@@ -30,7 +30,7 @@ function ChangePassword() {
   const password = watch('password');
   return (
     <ManagerLayout>
-      <Breadcrumb routeSegments={[{ name: 'General', path: '' }, { name: 'Settings' }]} />
+      <Breadcrumb routeSegments={[{ name: 'General', path: '/' }, { name: 'Settings' }]} />
       <h3 className={cx('title_changePass')}>Settings</h3>
       <div className={cx('wrapper_repass')}>
         <h4>

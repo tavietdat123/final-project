@@ -7,8 +7,8 @@ import { EmployeeType, GenderCode } from '../../../../component/enums';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../../configs/routes';
 const cx = classNames.bind(styles);
-function TableItem({ data, checked, handleSetDelete, unCheck, deleteEmployee }: any) {
-  const [active, setActive] = useState(false);
+function TableItem({ data, handleSetDelete, deleteEmployee }: any) {
+  const [active, setActive] = useState(() => deleteEmployee.some((el: any) => el === data.id));
   const handleChangeActive = (event: ChangeEvent<HTMLInputElement>) => {
     setActive(event.target.checked);
   };
@@ -18,22 +18,20 @@ function TableItem({ data, checked, handleSetDelete, unCheck, deleteEmployee }: 
   const navigate = useNavigate();
   useEffect(() => {
     handleSetDelete(data.id, active);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active]);
-  useEffect(() => {
-    setActive(checked);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked, unCheck]);
+  }, [active]);
+
   const handleDoubleClickAdd = () => {
     navigate(`${ROUTES.createOrUpdateEmployee}/${data.id}`);
   };
   useEffect(() => {
-    if (deleteEmployee.some((el: any) => el === data.id)) {
+    if (deleteEmployee.some((el: any) => el === data.id) && !active) {
       setActive(true);
+    } else if (deleteEmployee.length === 0) {
+      setActive(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deleteEmployee]);
   return (
     <TableRow
       className={cx('tr_body', { active })}

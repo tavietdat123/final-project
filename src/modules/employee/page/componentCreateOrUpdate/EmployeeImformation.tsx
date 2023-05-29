@@ -64,7 +64,6 @@ function EmployeeInformation({
   } = useForm<FormDataCU>({
     mode: 'onBlur',
   });
-
   const onSubmit = (data: FormDataCU) => {};
   useEffect(() => {
     // if (id && Object.keys(currentEmpolyee).length !== 0) {
@@ -486,7 +485,7 @@ function EmployeeInformation({
                       {...field}
                       className="select_default"
                       displayEmpty
-                      value={data.marriage_id || data.marriage_id === 0 ? data.marriage_id : '' ? data.marriage_id : ''}
+                      value={data.marriage_id ? (data.marriage_id ? data.marriage_id : '' ? data.marriage_id : '') : ''}
                       onChange={(e) => {
                         field.onChange(e.target.value);
                         handlleData({ marriage_id: e.target.value });
